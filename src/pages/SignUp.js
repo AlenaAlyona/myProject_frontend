@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import Typography from "@material-ui/core/Typography";
 import { signUp } from "../store/user/actions";
 import { selectToken } from "../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
-import { Divider } from "@material-ui/core";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -19,6 +17,7 @@ export default function SignUp() {
   const [cityId, setCityId] = useState("");
   const [city, setCity] = useState("");
   const [languageId, setLanguageId] = useState("");
+  const [language, setLanguage] = useState("");
   const [age, setAge] = useState("");
   const [bio, setBio] = useState("");
   const dispatch = useDispatch();
@@ -47,6 +46,20 @@ export default function SignUp() {
     setBio("");
     setAge("");
   }
+
+  const checkPasswords = () => {
+    if (password !== passwordConfirmation) {
+      return (
+        <div style={{ color: "#9E2121", fontSize: 12 }}>
+          Passwords don't match
+        </div>
+      );
+    } else {
+      return (
+        <div style={{ color: "#4F994F", fontSize: 12 }}>You're good to go</div>
+      );
+    }
+  };
 
   return (
     <Container>
@@ -87,15 +100,9 @@ export default function SignUp() {
             required
             onChange={(event) => setPasswordConfirmation(event.target.value)}
           />
-          {password !== passwordConfirmation ? (
-            <div style={{ color: "#9E2121", fontSize: 12 }}>
-              Passwords don't match
-            </div>
-          ) : (
-            <div style={{ color: "#4F994F", fontSize: 12 }}>
-              You're good to go
-            </div>
-          )}
+          {password.length === 0 && passwordConfirmation.length === 0
+            ? null
+            : checkPasswords()}
         </Form.Group>
 
         <Form.Group controlId="formBasicFirstName">
@@ -125,7 +132,7 @@ export default function SignUp() {
           <Form.Control
             as="select"
             custom
-            value={city}
+            value={cityId}
             onChange={(event) => setCityId(event.target.value)}
             placeholder="Choose your city"
             required
