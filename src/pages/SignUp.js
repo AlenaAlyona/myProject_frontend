@@ -6,6 +6,7 @@ import { signUp } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import Select from "react-select";
 
 import { selectToken } from "../store/user/selectors";
 import { fetchAllCities } from "../store/city/actions";
@@ -18,18 +19,41 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cityId, setCityId] = useState("");
-  const [city, setCity] = useState("");
   const [languageId, setLanguageId] = useState("");
   const [language, setLanguage] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
+  // const [addChild, setAddChild] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
-  console.log("ALL CITIES", allCities);
+  const sortedCities = [...allCities].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  const ageOptions = [
+    { value: "0", label: "0" },
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4" },
+    { value: "5", label: "5" },
+    { value: "6", label: "6" },
+    { value: "7", label: "7" },
+    { value: "8", label: "8" },
+    { value: "9", label: "9" },
+    { value: "10", label: "10" },
+    { value: "11", label: "11" },
+    { value: "12", label: "12" },
+    { value: "13", label: "13" },
+    { value: "14", label: "14" },
+    { value: "15", label: "15" },
+    { value: "16", label: "16" },
+    { value: "17", label: "17" },
+  ];
 
   useEffect(() => {
     dispatch(fetchAllCities());
@@ -42,10 +66,20 @@ export default function SignUp() {
   function submitForm(event) {
     event.preventDefault();
 
+    console.log(
+      "TO BACKEND",
+      email,
+      password,
+      firstName,
+      lastName,
+      cityId,
+      languageId,
+      bio,
+      age
+    );
     dispatch(
       signUp(email, password, firstName, lastName, cityId, languageId, bio, age)
     );
-
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -100,7 +134,7 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicPasswordConfirmation">
           <Form.Label>Confirm Your Password</Form.Label>
           <Form.Control
             value={passwordConfirmation}
@@ -125,7 +159,7 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicFirstName">
+        <Form.Group controlId="formBasicLastName">
           <Form.Label>Last Name</Form.Label>
           <Form.Control
             value={lastName}
@@ -136,7 +170,7 @@ export default function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicFirstName">
+        <Form.Group controlId="formBasicCity">
           <Form.Label>City</Form.Label>
           <Form.Control
             as="select"
@@ -146,11 +180,13 @@ export default function SignUp() {
             placeholder="Choose your city"
             required
           >
-            <option>1</option>
+            {sortedCities.map((c) => {
+              return <option key={c.id}>{c.name}</option>;
+            })}
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="formBasicFirstName">
+        <Form.Group controlId="formBasicLanguage">
           <Form.Label>Language</Form.Label>
           <Form.Control
             as="select"
@@ -164,21 +200,24 @@ export default function SignUp() {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="formBasicFirstName">
+        <Form.Group controlId="formBasicAge">
           <Form.Label>Child's Age</Form.Label>
-          <Form.Control
-            as="select"
-            custom
-            value={age}
-            onChange={(event) => setAge(event.target.value)}
-            placeholder="Your child's age"
+
+          <Select
             required
-          >
-            <option>0</option>
-          </Form.Control>
+            isMulti
+            options={ageOptions}
+            onChange={(event) => {
+              if (event !== null) {
+                setAge(event.map((e) => e.value));
+              } else {
+                setAge([]);
+              }
+            }}
+          />
         </Form.Group>
 
-        <Form.Group controlId="formBasicFirstName">
+        <Form.Group controlId="formBasicBio">
           <Form.Label>About You</Form.Label>
           <Form.Control
             value={bio}
