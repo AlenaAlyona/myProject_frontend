@@ -1,10 +1,10 @@
-import { CITIES_FETCHED } from "./actions";
+import { LANGS_FETCHED } from "./actions";
 
 const initialState = [];
 
-export default function cityReducer(state = initialState, action) {
+export default function langReducer(state = initialState, action) {
   switch (action.type) {
-    case CITIES_FETCHED:
+    case LANGS_FETCHED:
       return action.payload.sort((a, b) => a.name.localeCompare(b.name));
 
     default:
