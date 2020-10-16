@@ -10,15 +10,12 @@ const citiesFetched = (data) => ({
 });
 
 export const fetchAllCities = () => {
-  console.log("FETCH ALL CITIES outside");
   return async (dispatch, getState) => {
     const cityCount = selectAllCities(getState()).length;
-    console.log("FETCH ALL CITIES call");
     if (cityCount > 0) return;
 
     try {
       const res = await axios.get(`${apiUrl}/city`);
-      console.log("RESPONSE IN CITY ACTION", res);
       const cities = res.data;
       dispatch(citiesFetched(cities));
     } catch (error) {

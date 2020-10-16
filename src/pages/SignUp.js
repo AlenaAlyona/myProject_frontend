@@ -11,6 +11,8 @@ import Select from "react-select";
 import { selectToken } from "../store/user/selectors";
 import { fetchAllCities } from "../store/city/actions";
 import { selectAllCities } from "../store/city/selectors";
+import { fetchAllLangs } from "../store/language/actions";
+import { selectAllLangs } from "../store/language/selectors";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -20,7 +22,6 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   const [cityId, setCityId] = useState("");
   const [languageId, setLanguageId] = useState("");
-  const [language, setLanguage] = useState("");
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
 
@@ -29,9 +30,8 @@ export default function SignUp() {
 
   const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
-  const sortedCities = [...allCities].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  const allLangs = useSelector(selectAllLangs);
+  console.log("ALL LANGS", allLangs);
 
   const ageOptions = [
     { value: "0", label: "0" },
@@ -56,6 +56,7 @@ export default function SignUp() {
 
   useEffect(() => {
     dispatch(fetchAllCities());
+    dispatch(fetchAllLangs());
 
     if (token !== null) {
       history.push("/");
@@ -180,7 +181,7 @@ export default function SignUp() {
             <option value="" selected disabled>
               Select city
             </option>
-            {sortedCities.map((c) => {
+            {allCities.map((c) => {
               return (
                 <option value={c.id} key={c.id}>
                   {c.name}
