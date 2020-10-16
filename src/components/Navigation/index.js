@@ -12,7 +12,7 @@ export default function Navigation() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
 
-  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+  // const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
     <Navbar bg="light" expand="lg">
@@ -22,8 +22,8 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
-          <NavbarItem path="/" linkText="Home" />
-          {loginLogoutControls}
+          {/* <NavbarItem path="/" linkText="Home" /> */}
+          {/* {loginLogoutControls} */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
