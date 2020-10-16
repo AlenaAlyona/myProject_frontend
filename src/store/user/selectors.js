@@ -5,4 +5,4 @@ export const selectToken = (state) => {
 
 export const selectUser = (state) => state.user;
 
-export const selectAllUsers = (state) => state.allUsers;
+export const selectAllUsers = (state) => state.user.allUsers;
