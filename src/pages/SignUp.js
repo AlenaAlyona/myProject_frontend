@@ -23,7 +23,6 @@ export default function SignUp() {
   const [language, setLanguage] = useState("");
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
-  // const [addChild, setAddChild] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -80,14 +79,14 @@ export default function SignUp() {
     dispatch(
       signUp(email, password, firstName, lastName, cityId, languageId, bio, age)
     );
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-    setCityId("");
-    setLanguageId("");
-    setBio("");
-    setAge("");
+    // setEmail("");
+    // setPassword("");
+    // setFirstName("");
+    // setLastName("");
+    // setCityId("");
+    // setLanguageId("");
+    // setBio("");
+    // setAge("");
   }
 
   const checkPasswords = () => {
@@ -139,7 +138,7 @@ export default function SignUp() {
           <Form.Control
             value={passwordConfirmation}
             type="password"
-            placeholder="Password Confirmation"
+            placeholder="Password confirmation"
             required
             onChange={(event) => setPasswordConfirmation(event.target.value)}
           />
@@ -175,13 +174,18 @@ export default function SignUp() {
           <Form.Control
             as="select"
             custom
-            value={cityId}
             onChange={(event) => setCityId(event.target.value)}
-            placeholder="Choose your city"
             required
           >
+            <option value="" selected disabled>
+              Select city
+            </option>
             {sortedCities.map((c) => {
-              return <option key={c.id}>{c.name}</option>;
+              return (
+                <option value={c.id} key={c.id}>
+                  {c.name}
+                </option>
+              );
             })}
           </Form.Control>
         </Form.Group>

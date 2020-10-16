@@ -33,29 +33,27 @@ const usersFetched = (data) => ({
 export const logOut = () => ({ type: LOG_OUT });
 
 export const signUp = (
-  name,
   email,
   password,
   firstName,
   lastName,
   cityId,
   languageId,
-  age,
-  bio
+  bio,
+  age
 ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
-        name,
         email,
         password,
         firstName,
         lastName,
         cityId,
         languageId,
-        age,
         bio,
+        age,
       });
 
       dispatch(loginSuccess(response.data));
