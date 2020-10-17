@@ -24,6 +24,7 @@ export default function SignUp() {
   const [languageId, setLanguageId] = useState("");
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
+  // const [langOpts, setLangOpts] = useState();
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -54,9 +55,28 @@ export default function SignUp() {
     { value: "17", label: "17" },
   ];
 
+  // const opts = [
+  //   allLangs.map((l) => {
+  //     return { value: `${l.id}`, label: `${l.lang}` };
+  //   }),
+  // ];
+
   useEffect(() => {
     dispatch(fetchAllCities());
     dispatch(fetchAllLangs());
+
+    // if (allLangs.length > 0) {
+    //   const opts = [
+    //     allLangs.map((l) => {
+    //       return { value: `${l.id}`, label: `${l.lang}` };
+    //     }),
+    //   ];
+    //   console.log("LANG OPT", opts);
+    //   setLangOpts(opts);
+    // } else {
+    //   dispatch(fetchAllLangs());
+    // }
+    // to dependency --> allLangs, setLangOpts
 
     if (token !== null) {
       history.push("/");
@@ -177,8 +197,9 @@ export default function SignUp() {
             custom
             onChange={(event) => setCityId(event.target.value)}
             required
+            defaultValue=""
           >
-            <option value="" selected disabled>
+            <option value="" disabled>
               Select city
             </option>
             {allCities.map((c) => {
@@ -193,15 +214,41 @@ export default function SignUp() {
 
         <Form.Group controlId="formBasicLanguage">
           <Form.Label>Language</Form.Label>
+          {/* {console.log("INSIDE TERNARY", langOpts)}
+          {allLangs !== null &&
+          allLangs.length > 0 &&
+          langOpts !== undefined &&
+          langOpts.length > 0 ? (
+            <Select
+              required
+              isMulti
+              options={langOpts}
+              onChange={(event) => {
+                if (event !== null) {
+                  setLanguageId(event.map((e) => e.value));
+                } else {
+                  setLanguageId([]);
+                }
+              }}
+            />
+          ) : null} */}
           <Form.Control
             as="select"
             custom
-            value={languageId}
             onChange={(event) => setLanguageId(event.target.value)}
-            placeholder="Choose your language"
             required
+            defaultValue=""
           >
-            <option>1</option>
+            <option value="" disabled>
+              Select language
+            </option>
+            {allLangs.map((l) => {
+              return (
+                <option value={l.id} key={l.id}>
+                  {l.lang}
+                </option>
+              );
+            })}
           </Form.Control>
         </Form.Group>
 

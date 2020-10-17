@@ -5,7 +5,7 @@ const initialState = [];
 export default function langReducer(state = initialState, action) {
   switch (action.type) {
     case LANGS_FETCHED:
-      return action.payload.sort((a, b) => a.name.localeCompare(b.name));
+      return action.payload.sort((a, b) => a.lang.localeCompare(b.lang));
 
     default:
       return state;
