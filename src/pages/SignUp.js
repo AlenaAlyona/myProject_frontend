@@ -79,7 +79,7 @@ export default function SignUp() {
     // to dependency --> allLangs, setLangOpts
 
     if (token !== null) {
-      history.push("/");
+      history.push("/profile");
     }
   }, [dispatch, token, history]);
 

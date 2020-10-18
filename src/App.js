@@ -14,6 +14,7 @@ import Homepage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import MainPage from "./pages/MainPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/login" component={LogIn} />
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/main" component={MainPage} />
+        <Route exact path="/profile" component={ProfilePage} />
       </Switch>
     </div>
   );
