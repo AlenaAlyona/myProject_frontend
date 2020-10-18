@@ -25,11 +25,12 @@ export default function SignUp() {
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
   // const [langOpts, setLangOpts] = useState();
+  const [registered, setRegistered] = useState(false);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
   console.log("ALL LANGS", allLangs);
@@ -78,10 +79,10 @@ export default function SignUp() {
     // }
     // to dependency --> allLangs, setLangOpts
 
-    if (token !== null) {
-      history.push("/profile");
+    if (registered) {
+      history.push("/login");
     }
-  }, [dispatch, token, history]);
+  }, [dispatch, registered, history]);
 
   function submitForm(event) {
     event.preventDefault();
@@ -98,8 +99,21 @@ export default function SignUp() {
       age
     );
     dispatch(
-      signUp(email, password, firstName, lastName, cityId, languageId, bio, age)
+      signUp(
+        email,
+        password,
+        firstName,
+        lastName,
+        cityId,
+        languageId,
+        bio,
+        age,
+        function () {
+          setRegistered(true);
+        }
+      )
     );
+    // setRegistered(true);
     // setEmail("");
     // setPassword("");
     // setFirstName("");
