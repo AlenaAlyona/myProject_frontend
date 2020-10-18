@@ -13,6 +13,7 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import Homepage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import MainPage from "./pages/MainPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/" component={Homepage} />
         <Route exact path="/login" component={LogIn} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/main" component={MainPage} />
       </Switch>
     </div>
   );

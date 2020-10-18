@@ -17,7 +17,7 @@ export default function LogIn() {
 
   useEffect(() => {
     if (token !== null) {
-      history.push("/");
+      history.push("/main");
     }
   }, [token, history]);
 
