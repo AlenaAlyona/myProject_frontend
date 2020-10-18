@@ -40,7 +40,8 @@ export const signUp = (
   cityId,
   languageId,
   bio,
-  age
+  age,
+  successCallback
 ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -56,6 +57,7 @@ export const signUp = (
         age,
       });
 
+      successCallback();
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());
