@@ -33,9 +33,6 @@ export const fetchAllLangs = () => {
 
 export const fetchUsersWithLang = (languageId) => {
   return async (dispatch, getState) => {
-    const userWithLangCount = selectUsersWithLang(getState()).length;
-    if (userWithLangCount > 0) return;
-    console.log("LANG ID IN LANG ACTION", languageId);
     try {
       const res = await axios.get(`${apiUrl}/language/${languageId}/users`);
       console.log("RESPONSE IN LANG ACTION, SLECTED USERS", res);

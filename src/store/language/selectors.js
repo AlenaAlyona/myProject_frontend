@@ -5,7 +5,4 @@ export const selectAllLangs = (state) => state.language.allLangs;
 //   });
 // };
 
-export const selectUsersWithLang = (state) => {
-  console.log("STATE IN LANG", state);
-  return state.language.usersWithLang;
-};
+export const selectUsersWithLang = (state) => state.language.usersWithLang;
