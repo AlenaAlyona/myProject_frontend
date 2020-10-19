@@ -7,6 +7,8 @@ import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import Select from "react-select";
 
+import UserTemplate from "../components/UserTemplate/index";
+
 import { selectToken } from "../store/user/selectors";
 import { fetchAllLangs, fetchUsersWithLang } from "../store/language/actions";
 import {
@@ -24,14 +26,14 @@ export default function MainPage() {
   const token = useSelector(selectToken);
   const allLangs = useSelector(selectAllLangs);
   const usersWithLang = useSelector(selectUsersWithLang);
-
+  console.log("USER WITH LANGS", usersWithLang);
   useEffect(() => {
     dispatch(fetchAllLangs());
     dispatch(fetchUsersWithLang(languageId));
-
     // if (token !== null) {
     //   history.push("/");
     // }
+    console.log("LANG ID", languageId);
   }, [dispatch, languageId]);
 
   const getUsersWithLangs = (event) => {
@@ -45,24 +47,6 @@ export default function MainPage() {
       {" "}
       <Form.Group controlId="formBasicLanguage">
         <Form.Label>Language</Form.Label>
-        {/* {console.log("INSIDE TERNARY", langOpts)}
-          {allLangs !== null &&
-          allLangs.length > 0 &&
-          langOpts !== undefined &&
-          langOpts.length > 0 ? (
-            <Select
-              required
-              isMulti
-              options={langOpts}
-              onChange={(event) => {
-                if (event !== null) {
-                  setLanguageId(event.map((e) => e.value));
-                } else {
-                  setLanguageId([]);
-                }
-              }}
-            />
-          ) : null} */}
         <Form.Control
           as="select"
           custom
@@ -82,6 +66,18 @@ export default function MainPage() {
           })}
         </Form.Control>
       </Form.Group>
+      {usersWithLang.map((user) => {
+        return (
+          <UserTemplate
+            key={user.id}
+            firstName={user.firstName}
+            lastName={user.lastName}
+            cityName={user.city.name}
+            bio={user.bio}
+            children={user.children}
+          />
+        );
+      })}
     </Container>
   );
 }
