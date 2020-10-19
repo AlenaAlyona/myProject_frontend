@@ -22,7 +22,6 @@ export const fetchAllLangs = () => {
 
     try {
       const res = await axios.get(`${apiUrl}/language`);
-      console.log("RESPONSE IN LANG ACTION", res);
       const langs = res.data;
       dispatch(langsFetched(langs));
     } catch (error) {
@@ -35,7 +34,6 @@ export const fetchUsersWithLang = (languageId) => {
   return async (dispatch, getState) => {
     try {
       const res = await axios.get(`${apiUrl}/language/${languageId}/users`);
-      console.log("RESPONSE IN LANG ACTION, SLECTED USERS", res);
       const usersWithLang = res.data;
       dispatch(usersWithLangsFetched(usersWithLang));
     } catch (error) {
