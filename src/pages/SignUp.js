@@ -13,6 +13,9 @@ import { fetchAllCities } from "../store/city/actions";
 import { selectAllCities } from "../store/city/selectors";
 import { fetchAllLangs } from "../store/language/actions";
 import { selectAllLangs } from "../store/language/selectors";
+import { ageOptions } from "../config/constants";
+
+const firebase = require("firebase");
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -26,6 +29,7 @@ export default function SignUp() {
   const [bio, setBio] = useState("");
   // const [langOpts, setLangOpts] = useState();
   const [registered, setRegistered] = useState(false);
+  const [signUpError, setSignUpError] = useState("");
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,28 +37,6 @@ export default function SignUp() {
   // const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
-  console.log("ALL LANGS", allLangs);
-
-  const ageOptions = [
-    { value: "0", label: "0" },
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-    { value: "7", label: "7" },
-    { value: "8", label: "8" },
-    { value: "9", label: "9" },
-    { value: "10", label: "10" },
-    { value: "11", label: "11" },
-    { value: "12", label: "12" },
-    { value: "13", label: "13" },
-    { value: "14", label: "14" },
-    { value: "15", label: "15" },
-    { value: "16", label: "16" },
-    { value: "17", label: "17" },
-  ];
 
   // const opts = [
   //   allLangs.map((l) => {
@@ -87,17 +69,6 @@ export default function SignUp() {
   function submitForm(event) {
     event.preventDefault();
 
-    console.log(
-      "TO BACKEND",
-      email,
-      password,
-      firstName,
-      lastName,
-      cityId,
-      languageId,
-      bio,
-      age
-    );
     dispatch(
       signUp(
         email,
@@ -113,6 +84,30 @@ export default function SignUp() {
         }
       )
     );
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(
+        (authRes) => {
+          const userObj = {
+            email: authRes.user.email,
+          };
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(email)
+            .set(userObj)
+            .then((dbError) => {
+              console.log(dbError);
+              setSignUpError("Failed to add user");
+            });
+        },
+        (authError) => {
+          console.log(authError);
+          setSignUpError("Failed to add user");
+        }
+      );
     // setRegistered(true);
     // setEmail("");
     // setPassword("");
