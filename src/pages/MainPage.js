@@ -8,25 +8,37 @@ import { Col } from "react-bootstrap";
 import Select from "react-select";
 
 import { selectToken } from "../store/user/selectors";
-import { fetchAllLangs } from "../store/language/actions";
-import { selectAllLangs } from "../store/language/selectors";
+import { fetchAllLangs, fetchUsersWithLang } from "../store/language/actions";
+import {
+  selectAllLangs,
+  selectUsersWithLang,
+} from "../store/language/selectors";
 
 export default function MainPage() {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const [languageId, setLanguageId] = useState(null);
+  const [usersWithLangs, setUsersWithLangs] = useState(null);
 
   const token = useSelector(selectToken);
   const allLangs = useSelector(selectAllLangs);
+  const usersWithLang = useSelector(selectUsersWithLang);
 
   useEffect(() => {
     dispatch(fetchAllLangs());
+    dispatch(fetchUsersWithLang(languageId));
 
     // if (token !== null) {
     //   history.push("/");
     // }
-  }, [dispatch]);
+  }, [dispatch, languageId]);
+
+  const getUsersWithLangs = (event) => {
+    event.preventDefault();
+    console.log("EBENT VALUE", event.target.value);
+    setLanguageId(parseInt(event.target.value));
+  };
 
   return (
     <Container>
@@ -54,7 +66,7 @@ export default function MainPage() {
         <Form.Control
           as="select"
           custom
-          onChange={(event) => setLanguageId(event.target.value)}
+          onChange={getUsersWithLangs}
           required
           defaultValue=""
         >
