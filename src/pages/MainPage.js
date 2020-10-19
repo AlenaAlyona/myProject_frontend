@@ -26,19 +26,17 @@ export default function MainPage() {
   const token = useSelector(selectToken);
   const allLangs = useSelector(selectAllLangs);
   const usersWithLang = useSelector(selectUsersWithLang);
-  console.log("USER WITH LANGS", usersWithLang);
+
   useEffect(() => {
     dispatch(fetchAllLangs());
     dispatch(fetchUsersWithLang(languageId));
     // if (token !== null) {
     //   history.push("/");
     // }
-    console.log("LANG ID", languageId);
   }, [dispatch, languageId]);
 
   const getUsersWithLangs = (event) => {
     event.preventDefault();
-    console.log("EBENT VALUE", event.target.value);
     setLanguageId(parseInt(event.target.value));
   };
 

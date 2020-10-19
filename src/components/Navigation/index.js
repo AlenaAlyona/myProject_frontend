@@ -26,6 +26,7 @@ export default function Navigation() {
           {token ? (
             <NavbarItem path="/profile" linkText="Profile Page" />
           ) : null}
+          {token ? <NavbarItem path="/chat" linkText="Chat" /> : null}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
