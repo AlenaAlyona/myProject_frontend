@@ -7,6 +7,12 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FIREBASE } from "./config/constants";
+
+const firebase = require("firebase");
+require("firebase/firestore");
+
+firebase.initializeApp(FIREBASE);
 
 ReactDOM.render(
   <Router>
