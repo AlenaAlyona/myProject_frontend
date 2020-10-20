@@ -12,6 +12,98 @@ import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import NotificationImportant from "@material-ui/icons/NotificationImportant";
 
-export default function ChatList() {
-  return <div>Hello from ChatList</div>;
+function ChatList(props) {
+  const { classes } = props;
+
+  const newChat = () => {
+    console.log("new chat clicked");
+  };
+
+  const selectChat = (index) => {
+    console.log("select chat", index);
+  };
+
+  const userIsSender = (chat) =>
+    chat.messages[chat.messages.length - 1].sender === props.userEmail;
+
+  if (props.chats.length > 0) {
+    return (
+      <main className={classes.root}>
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          className={classes.newChatBtn}
+          onClick={newChat}
+        >
+          New Message
+        </Button>
+        <List>
+          {props.chats.map((_chat, _index) => {
+            return (
+              <div key={_index}>
+                <ListItem
+                  onClick={() => selectChat(_index)}
+                  className={classes.listitem}
+                  selected={props.selectedChatIndex === _index}
+                  alignItems="flex-start"
+                >
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp">
+                      {
+                        _chat.users
+                          .filter((_user) => _user !== props.userEmail)[0]
+                          .split("")[0]
+                      }
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      _chat.users.filter(
+                        (_user) => _user !== props.userEmail
+                      )[0]
+                    }
+                    secondary={
+                      <React.Fragment>
+                        <Typography component="span" color="textPrimary">
+                          {_chat.messages[
+                            _chat.messages.length - 1
+                          ].message.substring(0, 30)}
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  ></ListItemText>
+                  {_chat.receiverHasRead === false && !userIsSender(_chat) ? (
+                    <ListItemIcon>
+                      <NotificationImportant
+                        className={classes.unreadMessage}
+                      ></NotificationImportant>
+                    </ListItemIcon>
+                  ) : null}
+                </ListItem>
+                <Divider></Divider>
+              </div>
+            );
+          })}
+        </List>
+      </main>
+    );
+  } else {
+    return (
+      <main className={classes.root}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={newChat}
+          className={classes.newChatBtn}
+          color="primary"
+        >
+          New Message
+        </Button>
+        <List></List>
+      </main>
+    );
+  }
 }
+
+export default withStyles(styles)(ChatList);
