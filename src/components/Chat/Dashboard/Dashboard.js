@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core";
 import styles from "./styles";
 import { useHistory } from "react-router-dom";
 import ChatList from "../ChatList/ChatList";
+import ChatView from "../ChatView/ChatView";
 
 const firebase = require("firebase");
 
@@ -11,6 +12,7 @@ function Dashboard(props) {
   const [newChatFormVisible, setNewChatFormVisible] = useState(false);
   const [email, setEmail] = useState(null);
   const [chats, setChats] = useState([]);
+
   const { classes } = props;
   const history = useHistory();
 
@@ -19,8 +21,8 @@ function Dashboard(props) {
     setSelectedChat(null);
   };
 
-  const selectChat = (chatIndex) => {
-    console.log("SELECTED CHAT", chatIndex);
+  const selectChat = async (chatIndex) => {
+    setSelectedChat(chatIndex);
   };
 
   useEffect(() => {
@@ -49,7 +51,6 @@ function Dashboard(props) {
 
   return (
     <div>
-      <div>Hello from Dashboard</div>
       <ChatList
         history={history}
         newChatBtnFn={newChatBtnClicked}
@@ -58,6 +59,9 @@ function Dashboard(props) {
         userEmail={email}
         selectedChatIndex={selectedChat}
       ></ChatList>
+      {newChatFormVisible ? null : (
+        <ChatView user={email} chat={chats[selectedChat]}></ChatView>
+      )}
     </div>
   );
 }

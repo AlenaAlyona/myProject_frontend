@@ -20,7 +20,7 @@ function ChatList(props) {
   };
 
   const selectChat = (index) => {
-    console.log("select chat", index);
+    props.selectChatFn(index);
   };
 
   const userIsSender = (chat) =>
