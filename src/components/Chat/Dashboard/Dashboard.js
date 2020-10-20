@@ -14,6 +14,8 @@ function Dashboard(props) {
   const [email, setEmail] = useState(null);
   const [chats, setChats] = useState([]);
 
+  console.log("SELECTED CHAT", selectedChat);
+
   const { classes } = props;
   const history = useHistory();
 
@@ -22,8 +24,9 @@ function Dashboard(props) {
     setSelectedChat(null);
   };
 
-  const selectChat = async (chatIndex) => {
+  const selectChat = (chatIndex) => {
     setSelectedChat(chatIndex);
+    // messageRead(chatIndex);
   };
 
   const buildDocKey = (friend) => [email, friend].sort().join(":");
@@ -46,6 +49,25 @@ function Dashboard(props) {
       });
   };
 
+  const clickedChatWhereNotSender = (chatIndex) =>
+    chats[chatIndex].messages[chats[chatIndex].messages.length - 1].sender !==
+    email;
+
+  const messageRead = () => {
+    const docKey = buildDocKey(
+      chats[selectedChat].users.filter((_usr) => _usr !== email)[0]
+    );
+    if (clickedChatWhereNotSender(selectedChat)) {
+      firebase
+        .firestore()
+        .collection("chats")
+        .doc(docKey)
+        .update({ receiverHasRead: true });
+    } else {
+      console.log("Clicked message where the user was the sender");
+    }
+  };
+
   useEffect(() => {
     const mount = firebase.auth().onAuthStateChanged(async (_user) => {
       if (!_user) history.push("/login");
@@ -65,10 +87,14 @@ function Dashboard(props) {
           });
       }
     });
+    if (selectedChat !== null) {
+      messageRead();
+    }
+
     return () => {
       mount();
     };
-  }, [firebase]);
+  }, [firebase, selectedChat]);
 
   return (
     <div>
@@ -84,7 +110,14 @@ function Dashboard(props) {
         <ChatView user={email} chat={chats[selectedChat]}></ChatView>
       )}
       {selectedChat !== null && !newChatFormVisible ? (
-        <ChatTextBox submitMessageFn={submitMessage}></ChatTextBox>
+        <ChatTextBox
+          submitMessageFn={submitMessage}
+          // messageReadFn={() => {
+          //   console.log("SELECTED CHAT CALL BACK", selectedChat);
+          //   setSelectedChat(selectedChat);
+          // }}
+          messageReadFn={messageRead}
+        ></ChatTextBox>
       ) : null}
     </div>
   );

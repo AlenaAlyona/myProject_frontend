@@ -20,6 +20,8 @@ function ChatTextBox(props) {
     }
   };
 
+  const userClickedInput = () => props.messageReadFn();
+
   return (
     <div className={classes.chatTextBoxContainer}>
       <TextField
@@ -27,6 +29,7 @@ function ChatTextBox(props) {
         onKeyUp={(e) => userTyping(e)}
         id="chattextbox"
         className={classes.chatTextBox}
+        onFocus={userClickedInput}
       ></TextField>
       <Send onClick={submitMessage} className={classes.sendBtn}></Send>
     </div>
