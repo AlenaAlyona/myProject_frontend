@@ -8,31 +8,8 @@ import NewChat from "../Chat/NewChat/NewChat";
 const firebase = require("firebase");
 
 export default function UserTemplate(props) {
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const [newChatFormVisible, setNewChatFormVisible] = useState(false);
-
-  // const buildDocKey = (friend) => [this.state.email, friend].sort().join(":");
-
-  // const newChatSubmit = async (chatObj) => {
-  //   const docKey = buildDocKey(chatObj.sendTo);
-  //   await firebase
-  //     .firestore()
-  //     .collection("chats")
-  //     .doc(docKey)
-  //     .set({
-  //       receiverHasRead: false,
-  //       users: [email, chatObj.sendTo],
-  //       messages: [
-  //         {
-  //           message: chatObj.message,
-  //           sender: email,
-  //         },
-  //       ],
-  //     });
-  //   setNewChatFormVisible(false);
-  //   selectChat(chats.length - 1);
-  // };
 
   return (
     <div className="container">
@@ -52,7 +29,10 @@ export default function UserTemplate(props) {
         </Button>
         {newChatFormVisible ? (
           // <NewChat newChatSubmitFn={newChatSubmit}></NewChat>
-          <NewChat></NewChat>
+          <NewChat
+            receiver={props.email}
+            newChatSubmittedFn={() => setNewChatFormVisible(false)}
+          ></NewChat>
         ) : null}
       </div>
       <br />
