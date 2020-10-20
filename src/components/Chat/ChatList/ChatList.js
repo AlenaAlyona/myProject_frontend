@@ -15,10 +15,6 @@ import NotificationImportant from "@material-ui/icons/NotificationImportant";
 function ChatList(props) {
   const { classes } = props;
 
-  const newChat = () => {
-    console.log("new chat clicked");
-  };
-
   const selectChat = (index) => {
     props.selectChatFn(index);
   };
@@ -91,16 +87,17 @@ function ChatList(props) {
   } else {
     return (
       <main className={classes.root}>
-        <Button
-          variant="contained"
-          fullWidth
-          onClick={newChat}
-          className={classes.newChatBtn}
-          color="primary"
-        >
-          New Message
-        </Button>
-        <List></List>
+        <List>
+          {" "}
+          <div
+            variant="contained"
+            fullWidth
+            color="primary"
+            className={classes.header}
+          >
+            Chats
+          </div>
+        </List>
       </main>
     );
   }

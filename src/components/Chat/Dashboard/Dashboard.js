@@ -23,11 +23,6 @@ function Dashboard(props) {
     history.push("/");
   }
 
-  const newChatBtnClicked = () => {
-    setNewChatFormVisible(true);
-    setSelectedChat(null);
-  };
-
   const selectChat = (chatIndex) => {
     setSelectedChat(chatIndex);
     // messageRead(chatIndex);
@@ -104,7 +99,6 @@ function Dashboard(props) {
     <div>
       <ChatList
         history={history}
-        newChatBtnFn={newChatBtnClicked}
         selectChatFn={selectChat}
         chats={chats}
         userEmail={email}
