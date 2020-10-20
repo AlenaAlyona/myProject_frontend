@@ -4,6 +4,7 @@ import styles from "./styles";
 import { useHistory } from "react-router-dom";
 import ChatList from "../ChatList/ChatList";
 import ChatView from "../ChatView/ChatView";
+import ChatTextBox from "../ChatTextBox/ChatTextBox";
 
 const firebase = require("firebase");
 
@@ -23,6 +24,26 @@ function Dashboard(props) {
 
   const selectChat = async (chatIndex) => {
     setSelectedChat(chatIndex);
+  };
+
+  const buildDocKey = (friend) => [email, friend].sort().join(":");
+
+  const submitMessage = (msg) => {
+    const docKey = buildDocKey(
+      chats[selectedChat].users.filter((_usr) => _usr !== email)[0]
+    );
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(docKey)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          sender: email,
+          message: msg,
+          timestamp: Date.now(),
+        }),
+        receiverHasRead: false,
+      });
   };
 
   useEffect(() => {
@@ -62,6 +83,9 @@ function Dashboard(props) {
       {newChatFormVisible ? null : (
         <ChatView user={email} chat={chats[selectedChat]}></ChatView>
       )}
+      {selectedChat !== null && !newChatFormVisible ? (
+        <ChatTextBox submitMessageFn={submitMessage}></ChatTextBox>
+      ) : null}
     </div>
   );
 }
