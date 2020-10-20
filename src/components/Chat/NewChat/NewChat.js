@@ -10,24 +10,27 @@ import {
   Typography,
 } from "@material-ui/core";
 import styles from "./styles";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../store/user/selectors";
 
 const firebase = require("firebase");
 
 function NewChat(props) {
   const { classes } = props;
-  const [username, setUsername] = useState(null);
   const [message, setMessage] = useState(null);
+  const user = useSelector(selectUser);
+  const email = user.email;
 
   const userExists = async () => {
     const usersSnapshot = await firebase.firestore().collection("users").get();
     const exists = usersSnapshot.docs
       .map((_doc) => _doc.data().email)
-      .includes(username);
+      .includes(props.receiver);
     return exists;
   };
 
   const buildDocKey = () => {
-    return [firebase.auth().currentUser.email, username].sort().join(":");
+    return [email, props.receiver].sort().join(":");
   };
 
   const chatExists = async () => {
@@ -41,9 +44,29 @@ function NewChat(props) {
     return chat.exists;
   };
 
+  const newChatSubmit = async (chatObj) => {
+    console.log("new chat submit!");
+    const docKey = buildDocKey(chatObj.sendTo);
+    await firebase
+      .firestore()
+      .collection("chats")
+      .doc(docKey)
+      .set({
+        receiverHasRead: false,
+        users: [email, chatObj.sendTo],
+        messages: [
+          {
+            message: chatObj.message,
+            sender: email,
+          },
+        ],
+      });
+    props.newChatSubmittedFn();
+  };
+
   const createChat = () => {
-    props.newChatSubmitFn({
-      sendTo: username,
+    newChatSubmit({
+      sendTo: props.receiver,
       message: message,
     });
   };
@@ -51,6 +74,7 @@ function NewChat(props) {
   const submitNewChat = async (e) => {
     e.preventDefault();
     const usExists = await userExists();
+    console.log("user exists: ", usExists);
     if (usExists) {
       const chExists = await chatExists();
       if (!chExists) {

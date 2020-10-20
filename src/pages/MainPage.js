@@ -74,6 +74,7 @@ export default function MainPage() {
             cityName={user.city.name}
             bio={user.bio}
             children={user.children}
+            email={user.email}
           />
         );
       })}
