@@ -5,6 +5,8 @@ import {
   USERS_FETCHED,
 } from "./actions";
 
+const firebase = require("firebase");
+
 const initialState = {
   token: localStorage.getItem("token"),
   allUsers: [],
@@ -18,6 +20,7 @@ export default (state = initialState, action) => {
 
     case LOG_OUT:
       localStorage.removeItem("token");
+      firebase.auth().signOut();
       return { ...initialState, token: null };
 
     case TOKEN_STILL_VALID:
