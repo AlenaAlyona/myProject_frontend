@@ -32,11 +32,11 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/login" component={LogIn} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/main" component={MainPage} />
-        <Route exact path="/profile" component={ProfilePage} />
-        <Route exact path="/chat" component={DashBoard} />
+        <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/main" component={MainPage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/chat" component={DashBoard} />
       </Switch>
     </div>
   );

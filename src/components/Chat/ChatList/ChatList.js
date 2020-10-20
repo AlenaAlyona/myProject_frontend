@@ -29,16 +29,16 @@ function ChatList(props) {
   if (props.chats.length > 0) {
     return (
       <main className={classes.root}>
-        <Button
-          variant="contained"
-          fullWidth
-          color="primary"
-          className={classes.newChatBtn}
-          onClick={newChat}
-        >
-          New Message
-        </Button>
         <List>
+          <div
+            variant="contained"
+            fullWidth
+            color="primary"
+            className={classes.header}
+          >
+            Chats
+          </div>
+          <Divider></Divider>
           {props.chats.map((_chat, _index) => {
             return (
               <div key={_index}>

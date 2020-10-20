@@ -21,18 +21,18 @@ export default function MainPage() {
   const history = useHistory();
 
   const [languageId, setLanguageId] = useState(null);
-  const [usersWithLangs, setUsersWithLangs] = useState(null);
 
   const token = useSelector(selectToken);
   const allLangs = useSelector(selectAllLangs);
   const usersWithLang = useSelector(selectUsersWithLang);
 
+  if (token === null) {
+    history.push("/");
+  }
+
   useEffect(() => {
     dispatch(fetchAllLangs());
     dispatch(fetchUsersWithLang(languageId));
-    // if (token !== null) {
-    //   history.push("/");
-    // }
   }, [dispatch, languageId]);
 
   const getUsersWithLangs = (event) => {
