@@ -1,14 +1,14 @@
 const styles = (theme) => ({
   content: {
-    height: "calc(100vh - 150px)",
+    height: "calc(100vh - 50px)",
     overflow: "auto",
-    padding: "25px",
+    padding: "80px",
     marginLeft: "300px",
     boxSizing: "border-box",
     overflowY: "scroll",
-    top: "105px",
+    top: "80px",
     width: "calc(100% - 300px)",
-    position: "absolute",
+    position: "fixed",
   },
 
   userSent: {

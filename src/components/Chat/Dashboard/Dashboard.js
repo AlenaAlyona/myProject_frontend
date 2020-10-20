@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core";
 import styles from "./styles";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../../store/user/selectors";
 import ChatList from "../ChatList/ChatList";
 import ChatView from "../ChatView/ChatView";
 import ChatTextBox from "../ChatTextBox/ChatTextBox";
@@ -9,15 +11,17 @@ import ChatTextBox from "../ChatTextBox/ChatTextBox";
 const firebase = require("firebase");
 
 function Dashboard(props) {
+  const { classes } = props;
+  const history = useHistory();
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatFormVisible, setNewChatFormVisible] = useState(false);
   const [email, setEmail] = useState(null);
   const [chats, setChats] = useState([]);
+  const token = useSelector(selectToken);
 
-  console.log("SELECTED CHAT", selectedChat);
-
-  const { classes } = props;
-  const history = useHistory();
+  if (token === null) {
+    history.push("/");
+  }
 
   const newChatBtnClicked = () => {
     setNewChatFormVisible(true);

@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
+import NewChat from "../Chat/NewChat/NewChat";
 
 export default function UserTemplate(props) {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const [newChatFormVisible, setNewChatFormVisible] = useState(false);
 
-  function submit(event) {
-    event.preventDefault();
-  }
+  // const newChat = () => {
+  //   props.newChatBtnFn();
+  // };
+
+  const newChat = () => {
+    console.log("new chat clicked");
+  };
 
   return (
     <div className="container">
@@ -24,8 +31,15 @@ export default function UserTemplate(props) {
             return <p key={child.id}>Child's age: {child.age}</p>;
           })}
         </div>
-        <button>say hi</button>
+        <Button onClick={newChat}>Write a message</Button>
+        {newChatFormVisible ? (
+          <NewChat
+          // goToChatFn={this.goToChat}
+          // newChatSubmitFn={this.newChatSubmit}
+          ></NewChat>
+        ) : null}
       </div>
+      <br />
     </div>
   );
 }

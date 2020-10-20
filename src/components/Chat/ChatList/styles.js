@@ -9,6 +9,7 @@ const styles = (theme) => ({
   },
   listItem: {
     cursor: "pointer",
+    top: "50px",
   },
   newChatBtn: {
     borderRadius: "0px",
@@ -18,6 +19,12 @@ const styles = (theme) => ({
     position: "absolute",
     top: "0",
     right: "5px",
+  },
+  header: {
+    color: "#707BC4",
+    fontSize: "18px",
+    fontWeight: "Bold",
+    textAlign: "center",
   },
 });
 

@@ -27,10 +27,10 @@ export default function SignUp() {
   const [languageId, setLanguageId] = useState("");
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
-  // const [langOpts, setLangOpts] = useState();
+  const [langOpts, setLangOpts] = useState([]);
   const [registered, setRegistered] = useState(false);
   const [signUpError, setSignUpError] = useState("");
-
+  console.log("STATE LANGOPTS", langOpts);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -48,23 +48,22 @@ export default function SignUp() {
     dispatch(fetchAllCities());
     dispatch(fetchAllLangs());
 
-    // if (allLangs.length > 0) {
-    //   const opts = [
-    //     allLangs.map((l) => {
-    //       return { value: `${l.id}`, label: `${l.lang}` };
-    //     }),
-    //   ];
-    //   console.log("LANG OPT", opts);
-    //   setLangOpts(opts);
-    // } else {
-    //   dispatch(fetchAllLangs());
-    // }
+    if (allLangs.length > 0) {
+      const opts = allLangs.map((l) => {
+        return { value: `${l.id}`, label: `${l.lang}` };
+      });
+
+      console.log("LANG OPT", opts);
+      setLangOpts(opts);
+    } else {
+      dispatch(fetchAllLangs());
+    }
     // to dependency --> allLangs, setLangOpts
 
     if (registered) {
       history.push("/login");
     }
-  }, [dispatch, registered, history]);
+  }, [dispatch, registered, history, allLangs, setLangOpts]);
 
   function submitForm(event) {
     event.preventDefault();
@@ -223,7 +222,7 @@ export default function SignUp() {
 
         <Form.Group controlId="formBasicLanguage">
           <Form.Label>Language</Form.Label>
-          {/* {console.log("INSIDE TERNARY", langOpts)}
+          {console.log("INSIDE TERNARY", langOpts)}
           {allLangs !== null &&
           allLangs.length > 0 &&
           langOpts !== undefined &&
@@ -240,8 +239,8 @@ export default function SignUp() {
                 }
               }}
             />
-          ) : null} */}
-          <Form.Control
+          ) : null}
+          {/* <Form.Control
             as="select"
             custom
             onChange={(event) => setLanguageId(event.target.value)}
@@ -258,7 +257,7 @@ export default function SignUp() {
                 </option>
               );
             })}
-          </Form.Control>
+          </Form.Control> */}
         </Form.Group>
 
         <Form.Group controlId="formBasicAge">
