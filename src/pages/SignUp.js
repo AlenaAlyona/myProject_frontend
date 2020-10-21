@@ -37,7 +37,6 @@ export default function SignUp() {
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
 
-
   // if (token) {
   //   history.push("/main");
   // }
@@ -73,9 +72,6 @@ export default function SignUp() {
         languageId,
         bio,
         age
-        // function () {
-        //   setRegistered(true);
-        // }
       )
     );
 

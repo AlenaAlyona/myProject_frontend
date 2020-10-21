@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { Button, Alert } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import NewChat from "../Chat/NewChat/NewChat";
-
-const firebase = require("firebase");
 
 export default function UserTemplate(props) {
   const token = useSelector(selectToken);
   const [newChatFormVisible, setNewChatFormVisible] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   return (
     <div className="container">
+      <>
+        <Alert
+          show={alert}
+          variant="success"
+          onClose={() => setAlert(false)}
+          dismissible
+        >
+          <Alert.Heading>Message to {props.firstName} is sent!</Alert.Heading>
+          You can check out your conversation in {""}
+          <Alert.Link href="/chat">chat</Alert.Link>
+        </Alert>
+      </>
       <div>
         <h3>
           {props.firstName} {props.lastName}
@@ -28,10 +38,14 @@ export default function UserTemplate(props) {
           Write a message
         </Button>
         {newChatFormVisible ? (
-          // <NewChat newChatSubmitFn={newChatSubmit}></NewChat>
           <NewChat
             receiver={props.email}
-            newChatSubmittedFn={() => setNewChatFormVisible(false)}
+            newChatSubmittedFn={function (sent) {
+              setNewChatFormVisible(false);
+              if (sent) {
+                setAlert(true);
+              }
+            }}
           ></NewChat>
         ) : null}
       </div>

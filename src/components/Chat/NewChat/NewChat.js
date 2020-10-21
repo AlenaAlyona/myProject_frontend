@@ -7,7 +7,6 @@ import { selectUser } from "../../../store/user/selectors";
 const firebase = require("firebase");
 
 export default function NewChat(props) {
-  const { classes } = props;
   const [message, setMessage] = useState(null);
   const [show, setShow] = useState(true);
 
@@ -89,7 +88,7 @@ export default function NewChat(props) {
       } else {
         sendMsg();
       }
-      props.newChatSubmittedFn();
+      props.newChatSubmittedFn(true);
     } else {
       console.log("USER DOESNT EXIST");
     }
@@ -97,8 +96,11 @@ export default function NewChat(props) {
 
   return (
     <>
-      <Modal show={show} onHide={props.newChatSubmittedFn}>
-        <Modal.Header closeButton onClick={props.newChatSubmittedFn}>
+      <Modal show={show} onHide={() => props.newChatSubmittedFn(false)}>
+        <Modal.Header
+          closeButton
+          onClick={() => props.newChatSubmittedFn(false)}
+        >
           <Modal.Title>Send a message</Modal.Title>
         </Modal.Header>
         <Modal.Body>
