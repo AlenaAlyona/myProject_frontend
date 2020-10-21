@@ -37,6 +37,14 @@ export default function SignUp() {
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
 
+  // if (token) {
+  //   history.push("/main");
+  // }
+
+  if (registered) {
+    history.push("/login");
+  }
+
   useEffect(() => {
     dispatch(fetchAllCities());
     dispatch(fetchAllLangs());
@@ -49,11 +57,7 @@ export default function SignUp() {
     } else {
       dispatch(fetchAllLangs());
     }
-
-    if (registered) {
-      history.push("/login");
-    }
-  }, [dispatch, registered, history, allLangs, setLangOpts]);
+  }, [dispatch, history, allLangs, setLangOpts]);
 
   function submitForm(event) {
     event.preventDefault();
@@ -67,12 +71,14 @@ export default function SignUp() {
         cityId,
         languageId,
         bio,
-        age,
-        function () {
-          setRegistered(true);
-        }
+        age
+        // function () {
+        //   setRegistered(true);
+        // }
       )
     );
+
+    setRegistered(true);
 
     firebase
       .auth()
@@ -97,17 +103,6 @@ export default function SignUp() {
           setSignUpError("Failed to add user");
         }
       );
-
-    // setRegistered(false);
-    // setEmail("");
-    // setPassword("");
-    // setPasswordConfirmation("")
-    // setFirstName("");
-    // setLastName("");
-    // setCityId("");
-    // setLanguageId("");
-    // setBio("");
-    // setAge("");
   }
 
   const checkPasswords = () => {

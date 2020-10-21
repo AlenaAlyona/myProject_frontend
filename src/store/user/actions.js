@@ -59,7 +59,7 @@ export const signUp = (
         age,
       });
 
-      successCallback();
+      // successCallback();
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());

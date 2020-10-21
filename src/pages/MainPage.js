@@ -21,7 +21,6 @@ export default function MainPage() {
   const history = useHistory();
 
   const [languageId, setLanguageId] = useState(null);
-  const [newChatFormVisible, setNewChatFormVisible] = useState(false);
 
   const token = useSelector(selectToken);
   const allLangs = useSelector(selectAllLangs);
