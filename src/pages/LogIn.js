@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 
+const firebase = require("firebase");
+
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,15 +19,15 @@ export default function LogIn() {
 
   useEffect(() => {
     if (token !== null) {
-      history.push("/");
+      history.push("/main");
     }
   }, [token, history]);
 
   function submitForm(event) {
-    console.log("hi");
     event.preventDefault();
 
     dispatch(login(email, password));
+    firebase.auth().signInWithEmailAndPassword(email, password);
 
     setEmail("");
     setPassword("");

@@ -40,7 +40,8 @@ export const signUp = (
   cityId,
   languageId,
   bio,
-  age
+  age,
+  successCallback
 ) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
@@ -56,6 +57,7 @@ export const signUp = (
         age,
       });
 
+      successCallback();
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());
@@ -80,7 +82,7 @@ export const login = (email, password) => {
         email,
         password,
       });
-      console.log("RESPONSE", response.data);
+      // console.log("RESPONSE", response.data);
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
       dispatch(appDoneLoading());
@@ -100,7 +102,7 @@ export const login = (email, password) => {
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
-    console.log("TOKEN", token);
+    // console.log("TOKEN", token);
     if (token === null) return;
 
     dispatch(appLoading());

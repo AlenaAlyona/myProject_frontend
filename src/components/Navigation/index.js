@@ -22,7 +22,11 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
-          {/* <NavbarItem path="/" linkText="Home" /> */}
+          {token ? <NavbarItem path="/main" linkText="Main Page" /> : null}
+          {token ? (
+            <NavbarItem path="/profile" linkText="Profile Page" />
+          ) : null}
+          {token ? <NavbarItem path="/chat" linkText="Chat" /> : null}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>

@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import { signUp } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import Select from "react-select";
 
 import { selectToken } from "../store/user/selectors";
+import { signUp } from "../store/user/actions";
 import { fetchAllCities } from "../store/city/actions";
 import { selectAllCities } from "../store/city/selectors";
 import { fetchAllLangs } from "../store/language/actions";
 import { selectAllLangs } from "../store/language/selectors";
+import { ageOptions } from "../config/constants";
+
+const firebase = require("firebase");
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -24,82 +27,78 @@ export default function SignUp() {
   const [languageId, setLanguageId] = useState("");
   const [age, setAge] = useState([]);
   const [bio, setBio] = useState("");
-  // const [langOpts, setLangOpts] = useState();
-
+  const [langOpts, setLangOpts] = useState([]);
+  const [registered, setRegistered] = useState(false);
+  const [signUpError, setSignUpError] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const token = useSelector(selectToken);
+  // const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
-  console.log("ALL LANGS", allLangs);
-
-  const ageOptions = [
-    { value: "0", label: "0" },
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-    { value: "5", label: "5" },
-    { value: "6", label: "6" },
-    { value: "7", label: "7" },
-    { value: "8", label: "8" },
-    { value: "9", label: "9" },
-    { value: "10", label: "10" },
-    { value: "11", label: "11" },
-    { value: "12", label: "12" },
-    { value: "13", label: "13" },
-    { value: "14", label: "14" },
-    { value: "15", label: "15" },
-    { value: "16", label: "16" },
-    { value: "17", label: "17" },
-  ];
-
-  // const opts = [
-  //   allLangs.map((l) => {
-  //     return { value: `${l.id}`, label: `${l.lang}` };
-  //   }),
-  // ];
 
   useEffect(() => {
     dispatch(fetchAllCities());
     dispatch(fetchAllLangs());
 
-    // if (allLangs.length > 0) {
-    //   const opts = [
-    //     allLangs.map((l) => {
-    //       return { value: `${l.id}`, label: `${l.lang}` };
-    //     }),
-    //   ];
-    //   console.log("LANG OPT", opts);
-    //   setLangOpts(opts);
-    // } else {
-    //   dispatch(fetchAllLangs());
-    // }
-    // to dependency --> allLangs, setLangOpts
-
-    if (token !== null) {
-      history.push("/");
+    if (allLangs.length > 0) {
+      const opts = allLangs.map((l) => {
+        return { value: `${l.id}`, label: `${l.lang}` };
+      });
+      console.log("LANG OPT", opts);
+      setLangOpts(opts);
+    } else {
+      dispatch(fetchAllLangs());
     }
-  }, [dispatch, token, history]);
+
+    if (registered) {
+      history.push("/login");
+    }
+  }, [dispatch, registered, history, allLangs, setLangOpts]);
 
   function submitForm(event) {
     event.preventDefault();
 
-    console.log(
-      "TO BACKEND",
-      email,
-      password,
-      firstName,
-      lastName,
-      cityId,
-      languageId,
-      bio,
-      age
-    );
     dispatch(
-      signUp(email, password, firstName, lastName, cityId, languageId, bio, age)
+      signUp(
+        email,
+        password,
+        firstName,
+        lastName,
+        cityId,
+        languageId,
+        bio,
+        age,
+        function () {
+          setRegistered(true);
+        }
+      )
     );
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(
+        (authRes) => {
+          const userObj = {
+            email: authRes.user.email,
+          };
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(email)
+            .set(userObj)
+            .then((dbError) => {
+              console.log(dbError);
+              setSignUpError("Failed to add user");
+            });
+        },
+        (authError) => {
+          console.log(authError);
+          setSignUpError("Failed to add user");
+        }
+      );
+    // setRegistered(false);
     // setEmail("");
     // setPassword("");
     // setFirstName("");
@@ -214,7 +213,7 @@ export default function SignUp() {
 
         <Form.Group controlId="formBasicLanguage">
           <Form.Label>Language</Form.Label>
-          {/* {console.log("INSIDE TERNARY", langOpts)}
+          {console.log("INSIDE TERNARY", langOpts)}
           {allLangs !== null &&
           allLangs.length > 0 &&
           langOpts !== undefined &&
@@ -231,8 +230,8 @@ export default function SignUp() {
                 }
               }}
             />
-          ) : null} */}
-          <Form.Control
+          ) : null}
+          {/* <Form.Control
             as="select"
             custom
             onChange={(event) => setLanguageId(event.target.value)}
@@ -249,7 +248,7 @@ export default function SignUp() {
                 </option>
               );
             })}
-          </Form.Control>
+          </Form.Control> */}
         </Form.Group>
 
         <Form.Group controlId="formBasicAge">

@@ -13,6 +13,9 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import Homepage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
+import MainPage from "./pages/MainPage";
+import ProfilePage from "./pages/ProfilePage";
+import DashBoard from "./components/Chat/Dashboard/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,8 +32,11 @@ function App() {
       {isLoading ? <Loading /> : null}
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route exact path="/login" component={LogIn} />
-        <Route exact path="/signup" component={SignUp} />
+        <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/main" component={MainPage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/chat" component={DashBoard} />
       </Switch>
     </div>
   );
