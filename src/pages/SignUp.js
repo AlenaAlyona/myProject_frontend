@@ -30,19 +30,12 @@ export default function SignUp() {
   const [langOpts, setLangOpts] = useState([]);
   const [registered, setRegistered] = useState(false);
   const [signUpError, setSignUpError] = useState("");
-  console.log("STATE LANGOPTS", langOpts);
   const dispatch = useDispatch();
   const history = useHistory();
 
   // const token = useSelector(selectToken);
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
-
-  // const opts = [
-  //   allLangs.map((l) => {
-  //     return { value: `${l.id}`, label: `${l.lang}` };
-  //   }),
-  // ];
 
   useEffect(() => {
     dispatch(fetchAllCities());
@@ -52,13 +45,11 @@ export default function SignUp() {
       const opts = allLangs.map((l) => {
         return { value: `${l.id}`, label: `${l.lang}` };
       });
-
       console.log("LANG OPT", opts);
       setLangOpts(opts);
     } else {
       dispatch(fetchAllLangs());
     }
-    // to dependency --> allLangs, setLangOpts
 
     if (registered) {
       history.push("/login");
@@ -107,7 +98,7 @@ export default function SignUp() {
           setSignUpError("Failed to add user");
         }
       );
-    // setRegistered(true);
+    // setRegistered(false);
     // setEmail("");
     // setPassword("");
     // setFirstName("");
