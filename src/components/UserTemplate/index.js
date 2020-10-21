@@ -24,7 +24,7 @@ export default function UserTemplate(props) {
             return <p key={child.id}>Child's age: {child.age}</p>;
           })}
         </div>
-        <Button onClick={() => setNewChatFormVisible(!newChatFormVisible)}>
+        <Button onClick={() => setNewChatFormVisible(true)}>
           Write a message
         </Button>
         {newChatFormVisible ? (
