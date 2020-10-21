@@ -37,6 +37,14 @@ export default function SignUp() {
   const allCities = useSelector(selectAllCities);
   const allLangs = useSelector(selectAllLangs);
 
+  // if (token) {
+  //   history.push("/main");
+  // }
+
+  if (registered) {
+    history.push("/login");
+  }
+
   useEffect(() => {
     dispatch(fetchAllCities());
     dispatch(fetchAllLangs());
@@ -45,35 +53,32 @@ export default function SignUp() {
       const opts = allLangs.map((l) => {
         return { value: `${l.id}`, label: `${l.lang}` };
       });
-      console.log("LANG OPT", opts);
       setLangOpts(opts);
     } else {
       dispatch(fetchAllLangs());
     }
-
-    if (registered) {
-      history.push("/login");
-    }
-  }, [dispatch, registered, history, allLangs, setLangOpts]);
+  }, [dispatch, history, allLangs, setLangOpts]);
 
   function submitForm(event) {
     event.preventDefault();
-
     dispatch(
       signUp(
         email,
         password,
+        passwordConfirmation,
         firstName,
         lastName,
         cityId,
         languageId,
         bio,
-        age,
-        function () {
-          setRegistered(true);
-        }
+        age
+        // function () {
+        //   setRegistered(true);
+        // }
       )
     );
+
+    setRegistered(true);
 
     firebase
       .auth()
@@ -98,19 +103,16 @@ export default function SignUp() {
           setSignUpError("Failed to add user");
         }
       );
-    // setRegistered(false);
-    // setEmail("");
-    // setPassword("");
-    // setFirstName("");
-    // setLastName("");
-    // setCityId("");
-    // setLanguageId("");
-    // setBio("");
-    // setAge("");
   }
 
   const checkPasswords = () => {
-    if (password !== passwordConfirmation) {
+    if (password.length < 6 && password.length > 0) {
+      return (
+        <div style={{ color: "#9E2121", fontSize: 12 }}>
+          Password must contain at least 6 characters
+        </div>
+      );
+    } else if (password !== passwordConfirmation) {
       return (
         <div style={{ color: "#9E2121", fontSize: 12 }}>
           Passwords don't match
@@ -143,28 +145,33 @@ export default function SignUp() {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Create Password</Form.Label>
           <Form.Control
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             type="password"
-            placeholder="Password"
+            placeholder="must contain at least 6 or more characters"
             required
+            minlength="6"
           />
+          {password.length > 0 && password.length < 6 ? (
+            <div style={{ color: "#9E2121", fontSize: 12 }}>
+              Password must contain at least 6 characters
+            </div>
+          ) : null}
         </Form.Group>
 
         <Form.Group controlId="formBasicPasswordConfirmation">
-          <Form.Label>Confirm Your Password</Form.Label>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             value={passwordConfirmation}
             type="password"
             placeholder="Password confirmation"
             required
+            minlength="6"
             onChange={(event) => setPasswordConfirmation(event.target.value)}
           />
-          {password.length === 0 && passwordConfirmation.length === 0
-            ? null
-            : checkPasswords()}
+          {passwordConfirmation.length === 0 ? null : checkPasswords()}
         </Form.Group>
 
         <Form.Group controlId="formBasicFirstName">
@@ -213,7 +220,6 @@ export default function SignUp() {
 
         <Form.Group controlId="formBasicLanguage">
           <Form.Label>Language</Form.Label>
-          {console.log("INSIDE TERNARY", langOpts)}
           {allLangs !== null &&
           allLangs.length > 0 &&
           langOpts !== undefined &&
@@ -231,24 +237,6 @@ export default function SignUp() {
               }}
             />
           ) : null}
-          {/* <Form.Control
-            as="select"
-            custom
-            onChange={(event) => setLanguageId(event.target.value)}
-            required
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select language
-            </option>
-            {allLangs.map((l) => {
-              return (
-                <option value={l.id} key={l.id}>
-                  {l.lang}
-                </option>
-              );
-            })}
-          </Form.Control> */}
         </Form.Group>
 
         <Form.Group controlId="formBasicAge">
@@ -280,7 +268,7 @@ export default function SignUp() {
         </Form.Group>
 
         <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button constiant="primary" type="submit" onClick={submitForm}>
             Sign up
           </Button>
         </Form.Group>
