@@ -35,6 +35,7 @@ export const logOut = () => ({ type: LOG_OUT });
 export const signUp = (
   email,
   password,
+  passwordConfirmation,
   firstName,
   lastName,
   cityId,
@@ -49,6 +50,7 @@ export const signUp = (
       const response = await axios.post(`${apiUrl}/signup`, {
         email,
         password,
+        passwordConfirmation,
         firstName,
         lastName,
         cityId,
@@ -57,7 +59,7 @@ export const signUp = (
         age,
       });
 
-      successCallback();
+      // successCallback();
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());

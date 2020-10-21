@@ -12,10 +12,10 @@ export default function HomePage() {
           It's much easier to learn the language when you have friends who also
           speak it! Welcome to TALKIE, a nice place where multilingual families
           can meet each other! We understand how sometimes it can be challenging
-          to maintain kids' interest in the second mothertongue when you live in
-          a country with different language. Our mission is to help you and your
-          children to broad your horizone, practice your mothertongue and make
-          new friends. With love and care, team TALKIE.
+          to maintain kids' interest in one of the mothertongues when you live
+          in a country where language is different. Our mission is to help you
+          and your children to broad your horizone, practice your mothertongue
+          and make new friends. With love and care, team TALKIE.
         </p>
         <div className="buttons">
           <p>first time at our place?</p>
