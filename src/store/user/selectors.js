@@ -1,5 +1,4 @@
 export const selectToken = (state) => {
-  console.log("USER STATE", state);
   return state.user.token;
 };
 

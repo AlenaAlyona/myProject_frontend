@@ -17,12 +17,13 @@ export default function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={NavLink} to="/">
-        Lingua
+        TALKIE
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
           {token ? <NavbarItem path="/main" linkText="Main Page" /> : null}
+          {token ? <NavbarItem path="/chat" linkText="Chat" /> : null}
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
