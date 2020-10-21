@@ -1,23 +1,16 @@
 import React, { useState } from "react";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-  Paper,
-  withStyles,
-  CssBaseline,
-  Typography,
-} from "@material-ui/core";
-import styles from "./styles";
+import { Modal, InputGroup, Button, Form, FormControl } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/user/selectors";
 
 const firebase = require("firebase");
 
-function NewChat(props) {
+export default function NewChat(props) {
   const { classes } = props;
   const [message, setMessage] = useState(null);
+  const [show, setShow] = useState(true);
+
   const user = useSelector(selectUser);
   const email = user.email;
 
@@ -45,7 +38,6 @@ function NewChat(props) {
   };
 
   const newChatSubmit = async (chatObj) => {
-    console.log("new chat submit!");
     const docKey = buildDocKey(chatObj.sendTo);
     await firebase
       .firestore()
@@ -61,7 +53,6 @@ function NewChat(props) {
           },
         ],
       });
-    props.newChatSubmittedFn();
   };
 
   const createChat = () => {
@@ -71,51 +62,63 @@ function NewChat(props) {
     });
   };
 
+  const sendMsg = () => {
+    const docKey = buildDocKey();
+    firebase
+      .firestore()
+      .collection("chats")
+      .doc(docKey)
+      .update({
+        messages: firebase.firestore.FieldValue.arrayUnion({
+          sender: email,
+          message: message,
+          timestamp: Date.now(),
+        }),
+        receiverHasRead: false,
+      });
+  };
+
   const submitNewChat = async (e) => {
+    console.log("SUBMIGT");
     e.preventDefault();
     const usExists = await userExists();
-    console.log("user exists: ", usExists);
     if (usExists) {
       const chExists = await chatExists();
       if (!chExists) {
         createChat();
+      } else {
+        sendMsg();
       }
+      props.newChatSubmittedFn();
+    } else {
+      console.log("USER DOESNT EXIST");
     }
   };
 
   return (
-    <main className={classes.main}>
-      <CssBaseline></CssBaseline>
-      <Paper className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Send a message!
-        </Typography>
-        <form className={classes.form} onSubmit={(e) => submitNewChat(e)}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="new-chat-message">
-              Enter your message
-            </InputLabel>
-            <Input
-              required
-              id="new-chat-message"
-              className={classes.input}
-              autoFocus
-              onChange={(e) => setMessage(e.target.value)}
-            ></Input>
-          </FormControl>
-          <Button
-            fullWidth
-            className={classes.submit}
-            variant="contained"
-            color="primary"
-            type="submit"
-          >
-            Send
-          </Button>
-        </form>
-      </Paper>
-    </main>
+    <>
+      <Modal show={show} onHide={props.newChatSubmittedFn}>
+        <Modal.Header closeButton onClick={props.newChatSubmittedFn}>
+          <Modal.Title>Send a message</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={(e) => submitNewChat(e)}>
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Message"
+                aria-label="Message"
+                aria-describedby="basic-addon2"
+                onChange={(e) => setMessage(e.target.value)}
+              />
+              <InputGroup.Append>
+                <Button variant="outline-secondary" type="submit">
+                  Send
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
-
-export default withStyles(styles)(NewChat);

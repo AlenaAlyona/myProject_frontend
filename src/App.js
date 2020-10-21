@@ -35,7 +35,6 @@ function App() {
         <Route path="/login" component={LogIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/main" component={MainPage} />
-        <Route path="/profile" component={ProfilePage} />
         <Route path="/chat" component={DashBoard} />
       </Switch>
     </div>

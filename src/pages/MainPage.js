@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+import { Form, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
-import Select from "react-select";
+import { useHistory } from "react-router-dom";
 
 import UserTemplate from "../components/UserTemplate/index";
 

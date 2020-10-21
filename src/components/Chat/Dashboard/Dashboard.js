@@ -110,10 +110,6 @@ function Dashboard(props) {
       {selectedChat !== null && !newChatFormVisible ? (
         <ChatTextBox
           submitMessageFn={submitMessage}
-          // messageReadFn={() => {
-          //   console.log("SELECTED CHAT CALL BACK", selectedChat);
-          //   setSelectedChat(selectedChat);
-          // }}
           messageReadFn={messageRead}
         ></ChatTextBox>
       ) : null}

@@ -7,15 +7,15 @@ export default function HomePage() {
   return (
     <div>
       <Jumbotron fluid>
-        <h1>Welcome to Lingua</h1>
+        <h1>Welcome to TALKIE</h1>
         <p>
           It's much easier to learn the language when you have friends who also
-          speak it! Welcome to Lingua, a nice place where multilingual families
+          speak it! Welcome to TALKIE, a nice place where multilingual families
           can meet each other! We understand how sometimes it can be challenging
           to maintain kids' interest in the second mothertongue when you live in
           a country with different language. Our mission is to help you and your
           children to broad your horizone, practice your mothertongue and make
-          new friends. With love and care, team Lingua.
+          new friends. With love and care, team TALKIE.
         </p>
         <div className="buttons">
           <p>first time at our place?</p>
