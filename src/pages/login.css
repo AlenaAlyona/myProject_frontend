@@ -1,0 +1,22 @@
+.loginGroup {
+  padding-top: 10%;
+  padding-bottom: 20%;
+  text-align: center;
+}
+
+.loginImage {
+  text-align: center;
+  margin-top: 0px;
+  background-image: url("https://i.pinimg.com/originals/c4/92/ba/c492baf54af3024902ae3cc570f2aaf3.jpg");
+  background-repeat: repeat;
+  position: relative;
+}
+
+.loginForm {
+  margin-top: 0%;
+}
+
+.loginText {
+  background-color: whitesmoke;
+  padding: 1%;
+}

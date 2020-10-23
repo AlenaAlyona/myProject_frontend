@@ -1,19 +1,18 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import React, { useEffect } from "react";
+import "./chatlist.css";
+import ListGroup from "react-bootstrap/ListGroup";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import styles from "./styles";
-import Divider from "@material-ui/core/Divider";
-import Button from "@material-ui/core/Button";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import NotificationImportant from "@material-ui/icons/NotificationImportant";
 
-function ChatList(props) {
-  const { classes } = props;
+export default function ChatList(props) {
+  useEffect(() => {
+    const container = document.getElementById("chatlist");
+    if (container) container.scrollTo(0, container.scrollHeight);
+  });
 
   const selectChat = (index) => {
     props.selectChatFn(index);
@@ -24,25 +23,35 @@ function ChatList(props) {
 
   if (props.chats.length > 0) {
     return (
-      <main className={classes.root}>
-        <List>
-          <div
-            variant="contained"
-            fullWidth
-            color="primary"
-            className={classes.header}
-          >
-            Chats
-          </div>
-          <Divider></Divider>
+      <main className="chatlist">
+        <style>
+          {`
+   .list-group-item.disabled,
+   .list-group-item:disabled {
+     color: #fff;
+     pointer-events: none;
+     background-color: #98C7F3;
+   }
+
+   .list-group-item {
+    display: flex;
+  }
+    `}
+        </style>
+        <ListGroup defaultActiveKey="#mainList">
+          <ListGroup.Item action disabled action id="viewHeader">
+            <h5>
+              <b>Chats</b>
+            </h5>
+          </ListGroup.Item>
           {props.chats.map((_chat, _index) => {
             return (
               <div key={_index}>
-                <ListItem
+                <ListGroup.Item
+                  action
                   onClick={() => selectChat(_index)}
-                  className={classes.listitem}
                   selected={props.selectedChatIndex === _index}
-                  alignItems="flex-start"
+                  className="listItem"
                 >
                   <ListItemAvatar>
                     <Avatar alt="Remy Sharp">
@@ -71,36 +80,26 @@ function ChatList(props) {
                   ></ListItemText>
                   {_chat.receiverHasRead === false && !userIsSender(_chat) ? (
                     <ListItemIcon>
-                      <NotificationImportant
-                        className={classes.unreadMessage}
-                      ></NotificationImportant>
+                      <NotificationImportant></NotificationImportant>
                     </ListItemIcon>
                   ) : null}
-                </ListItem>
-                <Divider></Divider>
+                </ListGroup.Item>
               </div>
             );
           })}
-        </List>
+        </ListGroup>
       </main>
     );
   } else {
     return (
-      <main className={classes.root}>
-        <List>
+      <main>
+        <ListGroup defaultActiveKey="#mainList">
           {" "}
-          <div
-            variant="contained"
-            fullWidth
-            color="primary"
-            className={classes.header}
-          >
-            Chats
-          </div>
-        </List>
+          <div>Chats</div>
+        </ListGroup>
       </main>
     );
   }
 }
 
-export default withStyles(styles)(ChatList);
+// export default withStyles(styles)(ChatList);

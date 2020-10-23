@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./mainpage.css";
 import { Form, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -29,6 +30,8 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(fetchAllLangs());
     dispatch(fetchUsersWithLang(languageId));
+    const container = document.getElementById("profile-container");
+    if (container) container.scrollTo(0, container.scrollHeight);
   }, [dispatch, languageId]);
 
   const getUsersWithLangs = (event) => {
@@ -37,42 +40,51 @@ export default function MainPage() {
   };
 
   return (
-    <Container>
-      {" "}
-      <Form.Group controlId="formBasicLanguage">
-        <Form.Label>Language</Form.Label>
-        <Form.Control
-          as="select"
-          custom
-          onChange={getUsersWithLangs}
-          required
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Select language
-          </option>
-          {allLangs.map((l) => {
-            return (
-              <option value={l.id} key={l.id}>
-                {l.lang}
+    <div className="mainImage">
+      <Container>
+        {" "}
+        <Form.Group controlId="formBasicLanguage">
+          <div className="label">
+            <Form.Label>
+              <h3>Select Language</h3>
+            </Form.Label>
+
+            <Form.Control
+              as="select"
+              custom
+              onChange={getUsersWithLangs}
+              required
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Select language
               </option>
+              {allLangs.map((l) => {
+                return (
+                  <option value={l.id} key={l.id}>
+                    {l.lang}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </div>
+        </Form.Group>
+        <div id="profile-container">
+          {usersWithLang.map((user) => {
+            return (
+              <UserTemplate
+                key={user.id}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                cityName={user.city.name}
+                bio={user.bio}
+                children={user.children}
+                email={user.email}
+              />
             );
           })}
-        </Form.Control>
-      </Form.Group>
-      {usersWithLang.map((user) => {
-        return (
-          <UserTemplate
-            key={user.id}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            cityName={user.city.name}
-            bio={user.bio}
-            children={user.children}
-            email={user.email}
-          />
-        );
-      })}
-    </Container>
+        </div>
+      </Container>
+    </div>
   );
 }

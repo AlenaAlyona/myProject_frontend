@@ -1,9 +1,4 @@
-import {
-  LOG_OUT,
-  LOGIN_SUCCESS,
-  TOKEN_STILL_VALID,
-  USERS_FETCHED,
-} from "./actions";
+import { LOG_OUT, LOGIN_SUCCESS, TOKEN_STILL_VALID } from "./actions";
 
 const firebase = require("firebase");
 
@@ -25,9 +20,6 @@ export default (state = initialState, action) => {
 
     case TOKEN_STILL_VALID:
       return { ...state, ...action.payload };
-
-    case USERS_FETCHED:
-      return { ...state, allUsers: action.payload };
 
     default:
       return state;

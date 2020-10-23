@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectAllLangs, selectUsersWithLang } from "./selectors";
+import { selectAllLangs } from "./selectors";
 
 export const LANGS_FETCHED = "LANGS_FETCHED";
 export const USER_WITH_LANGS_FETCHED = "USER_WITH_LANGS_FETCHED";

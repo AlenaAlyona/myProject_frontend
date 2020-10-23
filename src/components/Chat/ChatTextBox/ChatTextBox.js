@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import * as RiIcons from "react-icons/ri";
 import TextField from "@material-ui/core/TextField";
-import Send from "@material-ui/icons/Send";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -25,13 +25,18 @@ function ChatTextBox(props) {
   return (
     <div className={classes.chatTextBoxContainer}>
       <TextField
-        placeholder="Type your message..."
+        placeholder="Message"
         onKeyUp={(e) => userTyping(e)}
         id="chattextbox"
         className={classes.chatTextBox}
         onFocus={userClickedInput}
       ></TextField>
-      <Send onClick={submitMessage} className={classes.sendBtn}></Send>
+      <RiIcons.RiSendPlane2Fill
+        value={{ color: "#4550e6" }}
+        size="25px"
+        onClick={submitMessage}
+        className={classes.sendBtn}
+      ></RiIcons.RiSendPlane2Fill>
     </div>
   );
 }
