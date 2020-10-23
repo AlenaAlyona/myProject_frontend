@@ -133,8 +133,8 @@ export default function SignUp() {
               required
               autoFocus
             />
-            <Form.Text className="text-muted" className="signupText">
-              We'll never share your email with anyone else.
+            <Form.Text className="signupFormText">
+              We'll never share your email with anyone else
             </Form.Text>
           </Form.Group>
 
@@ -231,8 +231,8 @@ export default function SignUp() {
                 }}
               />
             ) : null}
-            <Form.Text className="text-muted" className="signupText">
-              Choose as many languages as your family speak.
+            <Form.Text className="signupText">
+              Choose as many languages as your family speak
             </Form.Text>
           </Form.Group>
 
@@ -251,9 +251,9 @@ export default function SignUp() {
                 }
               }}
             />
-            <Form.Text className="text-muted" className="signupText">
+            <Form.Text className="signupText">
               If you have children of different age, just choose as many options
-              as needed.
+              as needed
             </Form.Text>
           </Form.Group>
 

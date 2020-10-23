@@ -39,7 +39,7 @@ export default function ChatList(props) {
     `}
         </style>
         <ListGroup defaultActiveKey="#mainList">
-          <ListGroup.Item action disabled action id="viewHeader">
+          <ListGroup.Item action disabled id="viewHeader">
             <h5>
               <b>Chats</b>
             </h5>
@@ -101,5 +101,3 @@ export default function ChatList(props) {
     );
   }
 }
-
-// export default withStyles(styles)(ChatList);

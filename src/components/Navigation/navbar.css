@@ -3,8 +3,7 @@
   height: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  /* position: absolute; */
+  justify-content: flex-start;
   z-index: 4;
 }
 
@@ -42,7 +41,7 @@
 
 .nav-text {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   padding: 8px 0px 8px 16px;
   list-style: none;
