@@ -10,7 +10,7 @@ export default function UserTemplate(props) {
   const [alert, setAlert] = useState(false);
 
   return (
-    <div className="userContainer">
+    <div className="user">
       <>
         <Alert
           show={alert}
