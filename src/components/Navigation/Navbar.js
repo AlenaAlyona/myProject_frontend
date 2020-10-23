@@ -47,12 +47,14 @@ function Navbar() {
                 </Link>
               </li>
             )}
-            <li className="nav-text">
-              <Link to="/">
-                <AiIcons.AiOutlineHome />
-                <span>Home</span>
-              </Link>
-            </li>
+            {token ? (
+              <li className="nav-text">
+                <Link to="/">
+                  <AiIcons.AiOutlineHome />
+                  <span>Home</span>
+                </Link>
+              </li>
+            ) : null}
             {token ? (
               <li className="nav-text">
                 <Link to="/main">
