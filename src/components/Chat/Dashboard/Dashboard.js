@@ -10,7 +10,6 @@ import ChatTextBox from "../ChatTextBox/ChatTextBox";
 const firebase = require("firebase");
 
 export default function Dashboard(props) {
-  const { classes } = props;
   const history = useHistory();
   const [selectedChat, setSelectedChat] = useState(null);
   const [newChatFormVisible, setNewChatFormVisible] = useState(false);

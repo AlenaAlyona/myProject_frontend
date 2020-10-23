@@ -1,7 +1,3 @@
-import { TextareaAutosize } from "@material-ui/core";
-import zIndex from "@material-ui/core/styles/zIndex";
-import { findByLabelText } from "@testing-library/react";
-
 const styles = (theme) => ({
   content: {
     height: "70%",

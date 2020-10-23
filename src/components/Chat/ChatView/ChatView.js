@@ -1,6 +1,5 @@
 import "./chatview.css";
 import React, { useEffect } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core";
 

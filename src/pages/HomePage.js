@@ -2,7 +2,7 @@ import React from "react";
 import "./homepage.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Button, Jumbotron } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 import { selectToken } from "../store/user/selectors";
 import { logOut } from "../store/user/actions";
@@ -13,7 +13,6 @@ export default function HomePage() {
 
   return (
     <div className="homepage">
-      {/* <Jumbotron className="jumbotron" fluid> */}
       <div className="textHome">
         <h1>Welcome to TALKIE</h1>
         <br />

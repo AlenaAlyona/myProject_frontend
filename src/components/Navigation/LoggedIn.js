@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logOut } from "../../store/user/actions";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
