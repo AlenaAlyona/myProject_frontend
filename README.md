@@ -1,7 +1,9 @@
 ## TALKIE
 
-TALKIE is an app where parents of bilingual children can find other families who speak the same language as they do and can set up a playdate.
-Playdate can not only help your child to maintain and improve language skills, first of all it's fun :sunglasses:
+TALKIE is an app where parents of bilingual children can find other families who speak the same language as they do and then they can set up a playdate.
+
+Playdate can help your child to maintain and improve language skills and a huge plus of it it's fun :sunglasses:
+
 Moreover this app has its own chat :wink:
 
 This app can solve a few problems at once:
