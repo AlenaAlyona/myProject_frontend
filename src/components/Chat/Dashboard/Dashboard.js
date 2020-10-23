@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withStyles } from "@material-ui/core";
-import styles from "./styles";
+import "./dashboard.css";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../../store/user/selectors";
@@ -10,7 +9,7 @@ import ChatTextBox from "../ChatTextBox/ChatTextBox";
 
 const firebase = require("firebase");
 
-function Dashboard(props) {
+export default function Dashboard(props) {
   const { classes } = props;
   const history = useHistory();
   const [selectedChat, setSelectedChat] = useState(null);
@@ -25,7 +24,6 @@ function Dashboard(props) {
 
   const selectChat = (chatIndex) => {
     setSelectedChat(chatIndex);
-    // messageRead(chatIndex);
   };
 
   const buildDocKey = (friend) => [email, friend].sort().join(":");
@@ -80,8 +78,6 @@ function Dashboard(props) {
             if (_user !== null) {
               setEmail(_user.email);
               setChats(chats);
-              console.log("USER", _user);
-              console.log("INSIDE FIREBASE", chats);
             }
           });
       }
@@ -93,10 +89,10 @@ function Dashboard(props) {
     return () => {
       mount();
     };
-  }, [firebase, selectedChat]);
+  }, [selectedChat, history]);
 
   return (
-    <div>
+    <div className="mainDiv">
       <ChatList
         history={history}
         selectChatFn={selectChat}
@@ -116,5 +112,3 @@ function Dashboard(props) {
     </div>
   );
 }
-
-export default withStyles(styles)(Dashboard);

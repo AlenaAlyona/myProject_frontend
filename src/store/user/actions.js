@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken, selectUser } from "./selectors";
+import { selectToken } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -10,7 +10,6 @@ import {
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
-export const USERS_FETCHED = "USERS_FETCHED";
 export const LOG_OUT = "LOG_OUT";
 
 const loginSuccess = (userWithToken) => {
@@ -23,11 +22,6 @@ const loginSuccess = (userWithToken) => {
 const tokenStillValid = (userWithoutToken) => ({
   type: TOKEN_STILL_VALID,
   payload: userWithoutToken,
-});
-
-const usersFetched = (data) => ({
-  type: USERS_FETCHED,
-  payload: data,
 });
 
 export const logOut = () => ({ type: LOG_OUT });
@@ -59,7 +53,7 @@ export const signUp = (
         age,
       });
 
-      // successCallback();
+      successCallback();
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", true, "account created"));
       dispatch(appDoneLoading());
@@ -84,7 +78,6 @@ export const login = (email, password) => {
         email,
         password,
       });
-      // console.log("RESPONSE", response.data);
       dispatch(loginSuccess(response.data));
       dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
       dispatch(appDoneLoading());
@@ -104,7 +97,6 @@ export const login = (email, password) => {
 export const getUserWithStoredToken = () => {
   return async (dispatch, getState) => {
     const token = selectToken(getState());
-    // console.log("TOKEN", token);
     if (token === null) return;
 
     dispatch(appLoading());

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import "./App.css";
 
 import { Switch, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
+import Navbar from "./components/Navigation/Navbar";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -14,7 +14,6 @@ import Homepage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import SignUp from "./pages/SignUp";
 import MainPage from "./pages/MainPage";
-import ProfilePage from "./pages/ProfilePage";
 import DashBoard from "./components/Chat/Dashboard/Dashboard";
 
 function App() {
@@ -27,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation />
+      <Navbar />
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>

@@ -1,0 +1,18 @@
+.homepage {
+  text-align: center;
+  margin-top: 0px;
+  background-image: url("https://i.pinimg.com/originals/c4/92/ba/c492baf54af3024902ae3cc570f2aaf3.jpg");
+  background-repeat: repeat;
+  height: 100vh;
+  margin: 0px;
+  position: relative;
+}
+
+.textHome {
+  background-color: whitesmoke;
+  padding: 1%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

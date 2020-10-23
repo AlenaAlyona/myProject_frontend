@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Modal, InputGroup, Button, Form, FormControl } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../../store/user/selectors";
 
@@ -32,7 +31,6 @@ export default function NewChat(props) {
       .collection("chats")
       .doc(docKey)
       .get();
-    console.log(chat.exists);
     return chat.exists;
   };
 
@@ -78,7 +76,6 @@ export default function NewChat(props) {
   };
 
   const submitNewChat = async (e) => {
-    console.log("SUBMIGT");
     e.preventDefault();
     const usExists = await userExists();
     if (usExists) {

@@ -1,0 +1,8 @@
+.userContainer {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: whitesmoke;
+  padding: 1%;
+}

@@ -1,0 +1,16 @@
+.chatview {
+  width: 80%;
+  height: 80vh;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  overflow: auto;
+  overflow-y: scroll;
+}
+
+#chatview-container {
+  width: 85%;
+  margin-top: 60px;
+  margin-left: 3%;
+  position: relative;
+  height: 70vh;
+}
