@@ -3,7 +3,6 @@
   height: 80px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   z-index: 4;
 }
 
