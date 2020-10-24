@@ -63,13 +63,13 @@ Go to [project board](https://github.com/AlenaAlyona/talkie-frontend/projects/1)
 
 ## Wireframe
 
-Go to [wireframe] (https://wireframepro.mockflow.com/view/Mf52aec124d48c35ff474cf773ea262d01602489739108)
+Go to [wireframe](https://wireframepro.mockflow.com/view/Mf52aec124d48c35ff474cf773ea262d01602489739108)
 
 ## Database Model
 
-Go to [database model] (https://dbdiagram.io/d/5f841b9d3a78976d7b774385)
+Go to [database model](https://dbdiagram.io/d/5f841b9d3a78976d7b774385)
  
 ## Backend server repo
 
-You can find it [here] (https://github.com/AlenaAlyona/talkie_backend)
+You can find it [here](https://github.com/AlenaAlyona/talkie_backend)
 
