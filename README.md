@@ -1,10 +1,12 @@
-## TALKIE
+## [TALKIE](https://5f92b713a9d3a800083fc88a--practical-goldberg-df7fdd.netlify.app/)
 
 TALKIE is an app where parents of bilingual children can find other families who speak the same language as they do and then they can set up a playdate.
 
 Playdate can help your child to maintain and improve language skills and a huge plus of it it's fun :sunglasses:
 
 Moreover this app has its own chat :wink:
+
+You can check it our here *[TALKIE](https://5f92b713a9d3a800083fc88a--practical-goldberg-df7fdd.netlify.app/)*
 
 This app can solve a few problems at once:
 * motivate kids to use minor language more often
@@ -13,7 +15,7 @@ This app can solve a few problems at once:
 * and make new friends 
 
 ## Technologies and concepts I used in this project
-* ReactJs
+* ReactJs 
 * Redux
 * Express
 * REST API
@@ -70,3 +72,4 @@ Go to [database model] (https://dbdiagram.io/d/5f841b9d3a78976d7b774385)
 ## Backend server repo
 
 You can find it [here] (https://github.com/AlenaAlyona/talkie_backend)
+
