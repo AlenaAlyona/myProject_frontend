@@ -22,12 +22,12 @@ export const ageOptions = [
   { value: "17", label: "17" },
 ];
 export const FIREBASE = {
-  apiKey: "AIzaSyBolItv6iOrb5gNS-niiyBc6hgqiYMVlDY",
-  authDomain: "talkie-11611.firebaseapp.com",
-  databaseURL: "https://talkie-11611.firebaseio.com",
-  projectId: "talkie-11611",
-  storageBucket: "talkie-11611.appspot.com",
-  messagingSenderId: "471212418727",
-  appId: "1:471212418727:web:79730870c1478b1d3c9d82",
-  measurementId: "G-VFRH38VFZ2",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_DB_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEAUSEREMENT_ID,
 };
