@@ -62,7 +62,7 @@ I learnt these new tools on my own by reading documentation, reading articles an
 Some of the features are still in progress (and I already have some new ideas in mind :grin:).
 I'll be glad to receive suggestions or feedback. You can write me [here](https://www.linkedin.com/in/alena-izakson/).
 
-## Project Board
+## Project Frontend Board
 
 Go to [project board](https://github.com/AlenaAlyona/talkie-frontend/projects/1)
 
