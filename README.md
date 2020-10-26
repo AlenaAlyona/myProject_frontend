@@ -8,6 +8,10 @@ Moreover this app has its own chat :wink:
 
 You can check it our here *[TALKIE](https://5f92b713a9d3a800083fc88a--practical-goldberg-df7fdd.netlify.app/)*
 
+Or watch my demo
+
+[![TALKIE DEMO](https://img.youtube.com/vi/Ax6oLBHjlC8/0.jpg)](http://www.youtube.com/watch?v=Ax6oLBHjlC8 "TALKIE DEMO")
+
 This app can solve a few problems at once:
 * motivate kids to use minor language more often
 * practice language skills
@@ -20,7 +24,8 @@ This app can solve a few problems at once:
 * Express
 * REST API
 * Sequelize as ORM
-* One-to-many and many-to-many models
+* One-to-many models
+* Many-to-many models :tulip:
 * Firebase :tulip:
 * React-select as multiselect :tulip:
 * Bootstrap :tulip:
