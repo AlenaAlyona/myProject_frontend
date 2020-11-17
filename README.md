@@ -1,4 +1,4 @@
-## [TALKIE](https://5f92b713a9d3a800083fc88a--practical-goldberg-df7fdd.netlify.app/)
+## [TALKIE](https://talkie-nl.netlify.app/)
 
 TALKIE is an app where parents of bilingual children can find other families who speak the same language as they do and then they can set up a playdate.
 
@@ -6,7 +6,7 @@ Playdate can help your child to maintain and improve language skills and a huge 
 
 Moreover this app has its own chat :wink:
 
-You can check it our here *[TALKIE](https://5f92b713a9d3a800083fc88a--practical-goldberg-df7fdd.netlify.app/)*
+You can check it our here *[TALKIE](https://talkie-nl.netlify.app/)*
 
 Or watch my demo
 
