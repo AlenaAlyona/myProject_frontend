@@ -1,10 +1,16 @@
-## TALKIE
+## [TALKIE](https://talkie-nl.netlify.app/)
 
 TALKIE is an app where parents of bilingual children can find other families who speak the same language as they do and then they can set up a playdate.
 
 Playdate can help your child to maintain and improve language skills and a huge plus of it it's fun :sunglasses:
 
 Moreover this app has its own chat :wink:
+
+You can check it our here *[TALKIE](https://talkie-nl.netlify.app/)*
+
+Or watch my demo
+
+[![TALKIE DEMO](https://img.youtube.com/vi/Ax6oLBHjlC8/0.jpg)](http://www.youtube.com/watch?v=Ax6oLBHjlC8 "TALKIE DEMO")
 
 This app can solve a few problems at once:
 * motivate kids to use minor language more often
@@ -13,12 +19,13 @@ This app can solve a few problems at once:
 * and make new friends 
 
 ## Technologies and concepts I used in this project
-* ReactJs
+* ReactJs 
 * Redux
 * Express
 * REST API
 * Sequelize as ORM
-* One-to-many and many-to-many models
+* One-to-many models
+* Many-to-many models :tulip:
 * Firebase :tulip:
 * React-select as multiselect :tulip:
 * Bootstrap :tulip:
@@ -55,18 +62,19 @@ I learnt these new tools on my own by reading documentation, reading articles an
 Some of the features are still in progress (and I already have some new ideas in mind :grin:).
 I'll be glad to receive suggestions or feedback. You can write me [here](https://www.linkedin.com/in/alena-izakson/).
 
-## Project Board
+## Project Frontend Board
 
 Go to [project board](https://github.com/AlenaAlyona/talkie-frontend/projects/1)
 
 ## Wireframe
 
-Go to [wireframe] (https://wireframepro.mockflow.com/view/Mf52aec124d48c35ff474cf773ea262d01602489739108)
+Go to [wireframe](https://wireframepro.mockflow.com/view/Mf52aec124d48c35ff474cf773ea262d01602489739108)
 
 ## Database Model
 
-Go to [database model] (https://dbdiagram.io/d/5f841b9d3a78976d7b774385)
+Go to [database model](https://dbdiagram.io/d/5f841b9d3a78976d7b774385)
  
 ## Backend server repo
 
-You can find it [here] (https://github.com/AlenaAlyona/talkie_backend)
+You can find it [here](https://github.com/AlenaAlyona/talkie_backend)
+

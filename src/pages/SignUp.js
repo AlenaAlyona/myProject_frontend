@@ -89,6 +89,7 @@ export default function SignUp() {
             .then((dbError) => {
               console.log(dbError);
               setSignUpError("Failed to add user");
+              console.log(signUpError);
             });
         },
         (authError) => {
@@ -101,19 +102,21 @@ export default function SignUp() {
   const checkPasswords = () => {
     if (password.length < 6 && password.length > 0) {
       return (
-        <div style={{ color: "#9E2121", fontSize: 12 }}>
+        <div className="signupText" style={{ color: "#9E2121", fontSize: 12 }}>
           Password must contain at least 6 characters
         </div>
       );
     } else if (password !== passwordConfirmation) {
       return (
-        <div style={{ color: "#9E2121", fontSize: 12 }}>
+        <div className="signupText" style={{ color: "#9E2121", fontSize: 12 }}>
           Passwords don't match
         </div>
       );
     } else {
       return (
-        <div style={{ color: "#4F994F", fontSize: 12 }}>You're good to go</div>
+        <div className="signupText" style={{ color: "#4F994F", fontSize: 12 }}>
+          You're good to go
+        </div>
       );
     }
   };
@@ -149,7 +152,10 @@ export default function SignUp() {
               minlength="6"
             />
             {password.length > 0 && password.length < 6 ? (
-              <div style={{ color: "#9E2121", fontSize: 12 }}>
+              <div
+                className="signupText"
+                style={{ color: "#9E2121", fontSize: 12 }}
+              >
                 Password must contain at least 6 characters
               </div>
             ) : null}
