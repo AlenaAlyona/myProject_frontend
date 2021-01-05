@@ -72,31 +72,34 @@ export default function SignUp() {
         }
       )
     );
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(
-        (authRes) => {
-          const userObj = {
-            email: authRes.user.email,
-          };
-          firebase
-            .firestore()
-            .collection("users")
-            .doc(email)
-            .set(userObj)
-            .then((dbError) => {
-              console.log(dbError);
-              setSignUpError("Failed to add user");
-              console.log(signUpError);
-            });
-        },
-        (authError) => {
-          console.log(authError);
-          setSignUpError("Failed to add user");
-        }
-      );
+    try {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(
+          (authRes) => {
+            const userObj = {
+              email: authRes.user.email,
+            };
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(email)
+              .set(userObj)
+              .then((dbError) => {
+                console.log(dbError);
+                setSignUpError("Failed to add user");
+                console.log(signUpError);
+              });
+          },
+          (authError) => {
+            console.log(authError);
+            setSignUpError("Failed to add user");
+          }
+        );
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   const checkPasswords = () => {
